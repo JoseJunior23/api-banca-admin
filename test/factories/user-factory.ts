@@ -1,4 +1,4 @@
-import { User } from '@modules/user/domain/entities/user';
+import { User } from '@modules/user/domain/entities/user.entity';
 
 import { makeGlobalEntity } from './global-entity-factory';
 

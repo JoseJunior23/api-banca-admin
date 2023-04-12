@@ -1,9 +1,9 @@
 import { randomUUID } from 'crypto';
 
 export interface IGlobalEntity {
-  id: string;
-  created_at: Date;
-  updated_at: Date;
+  id?: string;
+  created_at?: Date;
+  updated_at?: Date;
 }
 export class GlobalEntity implements IGlobalEntity {
   private props: IGlobalEntity;
