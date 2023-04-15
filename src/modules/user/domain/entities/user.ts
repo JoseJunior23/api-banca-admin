@@ -1,18 +1,24 @@
+import { Replace } from '@helpers/replace';
 import { randomUUID } from 'crypto';
 
 export interface UserProps {
-  id?: string;
+  id: string;
   name: string;
   email: string;
   password: string;
-  created_at?: Date;
-  updated_at?: Date;
+  created_at: Date;
+  updated_at: Date;
 }
 
 export class User {
   private props: UserProps;
 
-  constructor(props: UserProps) {
+  constructor(
+    props: Replace<
+      UserProps,
+      { id?: string; created_at?: Date; updated_at?: Date }
+    >,
+  ) {
     this.props = {
       ...props,
       id: props.id ?? randomUUID(),
