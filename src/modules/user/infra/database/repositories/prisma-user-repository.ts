@@ -1,9 +1,11 @@
 import { User } from '@modules/user/domain/entities/user';
 import { UserRepository } from '@modules/user/domain/repositories/user-repository';
+import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@shared/database/prisma.service';
 
 import { PrismaUserMapper } from '../mappers/prisma-user-mapper';
 
+@Injectable()
 export class PrismaUserRepository implements UserRepository {
   constructor(private prisma: PrismaService) {}
 
@@ -13,7 +15,7 @@ export class PrismaUserRepository implements UserRepository {
       data: raw,
     });
   }
-  async findByEmail(email: string): Promise<User> {
+  async findByEmail(email: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({
       where: {
         email,

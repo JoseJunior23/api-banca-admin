@@ -10,7 +10,7 @@ export class UserController {
 
   @Post()
   async create(@Body() { email, name, password }: CreateUserDto) {
-    const user = await this.createUser.execute({
+    const { user } = await this.createUser.execute({
       name,
       email,
       password,

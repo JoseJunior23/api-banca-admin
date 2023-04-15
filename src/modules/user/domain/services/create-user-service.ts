@@ -9,11 +9,19 @@ export interface CreateUserProps {
   password: string;
 }
 
+interface UserResponse {
+  user: User;
+}
+
 @Injectable()
 export class CreateUserService {
   constructor(private userRepository: UserRepository) {}
 
-  async execute({ email, name, password }: CreateUserProps): Promise<User> {
+  async execute({
+    email,
+    name,
+    password,
+  }: CreateUserProps): Promise<UserResponse> {
     const emailRegistered = await this.userRepository.findByEmail(email);
     if (emailRegistered) {
       throw new Error('There is a user registered with this email.');
@@ -27,6 +35,6 @@ export class CreateUserService {
 
     await this.userRepository.create(user);
 
-    return user;
+    return { user };
   }
 }

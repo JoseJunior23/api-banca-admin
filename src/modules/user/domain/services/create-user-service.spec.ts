@@ -8,8 +8,9 @@ describe('Create User', () => {
     const userRepository = new InMemoryUserRepository();
     const createUserService = new CreateUserService(userRepository);
 
-    const user = await createUserService.execute(makeUser());
+    const { user } = await createUserService.execute(makeUser());
 
+    console.log(user);
     expect(userRepository.users).toHaveLength(1);
     expect(userRepository.users[0]).toEqual(user);
   });
