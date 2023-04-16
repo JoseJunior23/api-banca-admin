@@ -1,4 +1,5 @@
-import { IsEmail, IsNotEmpty, Length } from 'class-validator';
+import { MessagesPassword, RegExHelper } from '@helpers/regex-password';
+import { IsEmail, IsNotEmpty, Length, Matches } from 'class-validator';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -11,5 +12,6 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @Length(6, 15)
+  @Matches(RegExHelper.password, { message: MessagesPassword.PASSWORD_VALID })
   password: string;
 }
