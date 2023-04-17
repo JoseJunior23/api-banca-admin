@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { BcryptHashProvider } from '@providers/hashPasswordProvider/bcrypt-hash-provider/bcrypt-hash-provider';
 
 import { User } from '../entities/user';
 import { UserRepository } from '../repositories/user-repository';
@@ -15,7 +16,10 @@ interface UserResponse {
 
 @Injectable()
 export class CreateUserService {
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly hashPasswordRepository: BcryptHashProvider,
+  ) {}
 
   async execute({
     email,
@@ -27,10 +31,14 @@ export class CreateUserService {
       throw new Error('There is a user registered with this email.');
     }
 
+    const hashedPassword = await this.hashPasswordRepository.hashGenerate(
+      password,
+    );
+
     const user = new User({
       name,
       email,
-      password,
+      password: hashedPassword,
     });
 
     await this.userRepository.create(user);

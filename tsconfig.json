@@ -19,10 +19,11 @@
     "noFallthroughCasesInSwitch": false,
     "resolveJsonModule": true,
     "paths": {
-      "@shared/*": ["src/shared/*"],
+      "@shared/*": ["./src/shared/*"],
       "@helpers/*": ["./src/helpers/*"],
       "@modules/*": ["./src/modules/*"],
       "@config/*": ["./src/config/*"],
+      "@providers/*": ["./src/providers/*"],
       "@test/*": ["./test/*"]
     }
   }
