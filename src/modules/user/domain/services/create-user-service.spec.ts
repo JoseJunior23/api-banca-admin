@@ -15,7 +15,6 @@ describe('Create User', () => {
 
     const { user } = await createUserService.execute(makeUser());
 
-    console.log(user);
     expect(userRepository.users).toHaveLength(1);
     expect(userRepository.users[0]).toEqual(user);
   });
