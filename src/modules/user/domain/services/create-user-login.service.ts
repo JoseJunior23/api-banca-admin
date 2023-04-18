@@ -11,7 +11,7 @@ interface UserLoginProps {
   password: string;
 }
 
-interface LoginResponse {
+export interface LoginResponse {
   user: User;
   token: string;
 }
@@ -33,7 +33,6 @@ export class LoginUserService {
       password,
       user.password,
     );
-
     if (!confirmedPassword) {
       throw new Error('Incorrect email/password combination.');
     }
@@ -43,7 +42,6 @@ export class LoginUserService {
       expiresIn: authConfig.jwt.expiresIn,
     });
 
-    console.log(token);
     return { user, token };
   }
 }
