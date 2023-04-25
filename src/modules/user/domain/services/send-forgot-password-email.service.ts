@@ -12,8 +12,8 @@ interface SendForgotPasswordEmailProps {
 @Injectable()
 export class SendForgotPasswordEmailService {
   constructor(
-    private readonly userRepository: UserRepository,
     private readonly userTokenRepository: UserTokenRepository,
+    private readonly userRepository: UserRepository,
   ) {}
 
   async execute({ email }: SendForgotPasswordEmailProps): Promise<void> {
@@ -26,6 +26,7 @@ export class SendForgotPasswordEmailService {
 
     const forgotTemplate = path.resolve(
       __dirname,
+      '..',
       '..',
       'views',
       'forgotPassword.hbs',
