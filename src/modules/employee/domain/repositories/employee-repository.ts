@@ -1,6 +1,6 @@
 import { Employee } from '../entities/employee';
 
-abstract class EmployeeRepository {
+export abstract class EmployeeRepository {
   abstract create(employee: Employee): Promise<void>;
   abstract save(employee: Employee): Promise<Employee>;
   abstract remove(employee: Employee): Promise<void>;
