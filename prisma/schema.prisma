@@ -29,4 +29,30 @@ model UserToken {
   user       User     @relation(fields: [user_id], references: [id])
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  @@map("user_tokens")
+}
+
+model WorkSection {
+  id          String     @id @default(uuid())
+  name        String     @unique
+  description String
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+  Employee    Employee[]
+
+  @@map("work_sections")
+}
+
+model Employee {
+  id              String      @id @default(uuid())
+  name            String
+  nickname        String
+  phone           String
+  created_at      DateTime    @default(now())
+  updated_at      DateTime    @updatedAt
+  workSection     WorkSection @relation(fields: [work_section_id], references: [id])
+  work_section_id String
+
+  @@map("employees")
 }
