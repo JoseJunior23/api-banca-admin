@@ -9,9 +9,15 @@ import { IsAuthenticatedMiddleware } from '@shared/middlewares/isAuthenticated';
 
 import { EmployeeModule } from './modules/employee/employee.module';
 import { UserModule } from './modules/user/user.module';
+import { WorkSectionModule } from './modules/work-section/work-section.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), UserModule, EmployeeModule],
+  imports: [
+    ConfigModule.forRoot(),
+    UserModule,
+    EmployeeModule,
+    WorkSectionModule,
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
