@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { WorkSectionRepository } from '../repositories/work-section-repository';
 
@@ -15,7 +15,7 @@ export class DeleteWorkSectionService {
       workSectionId,
     );
     if (!workSection) {
-      throw new Error('Work section not found.');
+      throw new NotFoundException('Work section not found.');
     }
 
     await this.workSectionRepository.remove(workSection);

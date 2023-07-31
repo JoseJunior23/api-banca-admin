@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 
 import { WorkSection } from '../entities/work-section';
 import { WorkSectionRepository } from '../repositories/work-section-repository';
@@ -24,7 +24,9 @@ export class CreateWorkSectionService {
       name,
     );
     if (workSectionRegistered) {
-      throw new Error('There is a work section registered with this name.');
+      throw new ConflictException(
+        'There is a work section registered with this name.',
+      );
     }
 
     const workSection = new WorkSection({

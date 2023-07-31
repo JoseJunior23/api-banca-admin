@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { WorkSection } from '../entities/work-section';
 import { WorkSectionRepository } from '../repositories/work-section-repository';
@@ -22,7 +22,7 @@ export class UpdateWorkSectionService {
       workSectionId,
     );
     if (!workSection) {
-      throw new Error('Work Section not found.');
+      throw new NotFoundException('Work Section not found.');
     }
 
     workSection.name = name;

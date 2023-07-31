@@ -1,9 +1,9 @@
+import { EmployeeModule } from '@modules/employee/employee.module';
+import { WorkSectionModule } from '@modules/work-section/work-section.module';
 import { Module } from '@nestjs/common';
 
-import { WorkSectionModule } from './modules/work-section/work-section.module';
-
 @Module({
-  imports: [WorkSectionModule],
+  imports: [WorkSectionModule, EmployeeModule],
   controllers: [],
   providers: [],
 })
