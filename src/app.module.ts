@@ -1,10 +1,14 @@
 import { EmployeeModule } from '@modules/employee/employee.module';
-import { WorkSectionModule } from '@modules/work-section/work-section.module';
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmConfig } from '@shared/database/typeorm.config';
 
 @Module({
-  imports: [WorkSectionModule, EmployeeModule],
-  controllers: [],
-  providers: [],
+  imports: [
+    ConfigModule.forRoot({ envFilePath: ['.env'] }),
+    TypeOrmModule.forRootAsync({ useClass: TypeOrmConfig }),
+    EmployeeModule,
+  ],
 })
 export class AppModule {}
