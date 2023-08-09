@@ -47,7 +47,7 @@ export class TypeormPlanRepository implements PlanRepository {
   }
 
   async findAll(): Promise<PlanProps[]> {
-    const factories = await this.ormPlanRepository.find();
-    return factories;
+    const plans = await this.ormPlanRepository.find();
+    return plans;
   }
 }
