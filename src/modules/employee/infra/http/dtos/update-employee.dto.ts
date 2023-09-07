@@ -1,15 +1,11 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { Team } from '@modules/team/infra/typeorm/entities/team.entity';
 
 export class UpdateEmployeeDto {
-  @IsNotEmpty()
-  @IsString()
-  name: string;
+  name?: string;
 
-  @IsNotEmpty()
-  @IsString()
-  phone: string;
+  phone?: string;
 
-  @IsNotEmpty()
-  @IsString()
-  jobTitle: string;
+  jobTitle?: string;
+
+  team?: Team;
 }

@@ -1,8 +1,11 @@
-import { EmployeeProps } from '@modules/employee/domain/models/employee.model';
+import { Team } from '@modules/team/infra/typeorm/entities/team.entity';
+import { EmployeeProps } from 'src/modules/employee/domain/models/employee.model';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -20,6 +23,16 @@ export class Employee implements EmployeeProps {
 
   @Column({ name: 'job_title' })
   jobTitle: string;
+
+  @ManyToOne(() => Team, team => team.employees, {
+    cascade: ['insert'],
+    eager: true,
+  })
+  @JoinColumn({ name: 'team_id' })
+  team?: Team;
+
+  @Column({ name: 'team_id' })
+  teamId?: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

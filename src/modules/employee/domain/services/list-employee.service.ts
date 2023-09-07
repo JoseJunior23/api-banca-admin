@@ -8,7 +8,8 @@ export class ListEmployeeService {
   constructor(private readonly employeeRepository: EmployeeRepository) {}
 
   async execute(): Promise<EmployeeIdProps[]> {
-    const employees = await this.employeeRepository.findAll();
+    const employees = await this.employeeRepository.findAllWithTeams();
+    console.log(employees);
     return employees;
   }
 }

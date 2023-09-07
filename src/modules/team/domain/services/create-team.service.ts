@@ -13,7 +13,6 @@ export class CreateTeamService {
     if (teamExists) {
       throw new ConflictException('There is a team with this name.');
     }
-
     const team = await this.teamRepository.create({
       name,
       description,

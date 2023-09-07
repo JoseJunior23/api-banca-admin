@@ -7,14 +7,17 @@ import { Repository } from 'typeorm';
 import { Team } from '../entities/team.entity';
 
 @Injectable()
-export class TypeormTeamRepository implements TeamRepository {
+export class TeamTypeormRepository implements TeamRepository {
   constructor(
     @InjectRepository(Team)
     private readonly ormRepository: Repository<Team>,
   ) {}
 
   public async create({ name, description }: CreateTeamProps): Promise<Team> {
-    const team = this.ormRepository.create({ name, description });
+    const team = this.ormRepository.create({
+      name,
+      description,
+    });
     await this.ormRepository.save(team);
     return team;
   }
@@ -31,7 +34,7 @@ export class TypeormTeamRepository implements TeamRepository {
   public async findById(id: string): Promise<Team | null> {
     const team = this.ormRepository.findOne({
       where: { id },
-      // relations: ['employee', 'plan_detail'],
+      relations: ['employees'],
     });
     return team;
   }

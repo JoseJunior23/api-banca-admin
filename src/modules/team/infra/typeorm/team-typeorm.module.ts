@@ -3,14 +3,14 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { Team } from './entities/team.entity';
-import { TypeormTeamRepository } from './repositories/typeorm-team.Repository';
+import { TeamTypeormRepository } from './repositories/typeorm-team.Repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Team])],
   providers: [
     {
       provide: TeamRepository,
-      useClass: TypeormTeamRepository,
+      useClass: TeamTypeormRepository,
     },
   ],
   exports: [TeamRepository],

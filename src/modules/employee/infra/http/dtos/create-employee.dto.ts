@@ -1,7 +1,6 @@
-import { CreateEmployeeProps } from '@modules/employee/domain/models/create-employee.model';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
-export class CreateEmployeeDto implements CreateEmployeeProps {
+export class CreateEmployeeDto {
   @IsNotEmpty()
   @IsString()
   name: string;
@@ -13,4 +12,8 @@ export class CreateEmployeeDto implements CreateEmployeeProps {
   @IsNotEmpty()
   @IsString()
   jobTitle: string;
+
+  @IsString()
+  @IsUUID()
+  teamId?: string;
 }

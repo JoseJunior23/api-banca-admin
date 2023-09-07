@@ -27,11 +27,12 @@ export class EmployeeController {
   ) {}
 
   @Post()
-  async create(@Body() { jobTitle, name, phone }: CreateEmployeeDto) {
+  async create(@Body() { jobTitle, name, phone, teamId }: CreateEmployeeDto) {
     const employee = await this.createEmployee.execute({
       jobTitle,
       name,
       phone,
+      teamId,
     });
     return { employee: EmployeeViewModel.toHTTP(employee) };
   }
@@ -45,13 +46,14 @@ export class EmployeeController {
   @Put(':id/update')
   async update(
     @Param('id') id: string,
-    @Body() { name, phone, jobTitle }: UpdateEmployeeDto,
+    @Body() { name, phone, jobTitle, team }: UpdateEmployeeDto,
   ): Promise<Employee> {
     const newEmployee = await this.updateEmployee.execute({
       employeeId: id,
       name,
       phone,
       jobTitle,
+      team,
     });
     return newEmployee;
   }

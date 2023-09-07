@@ -1,4 +1,4 @@
-import { CreateTeamProps } from '../models/create-team.model.ts';
+import { CreateTeamProps } from '../models/create-team.model.ts.js';
 import { TeamProps } from '../models/team.model.js';
 
 export abstract class TeamRepository {

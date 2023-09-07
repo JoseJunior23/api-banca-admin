@@ -1,56 +1,82 @@
-import { CreateEmployeeProps } from '@modules/employee/domain/models/create-employee.model';
-import { EmployeeProps } from '@modules/employee/domain/models/employee.model';
-import { EmployeeRepository } from '@modules/employee/domain/repositories/employee.repository';
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+/* eslint-disable simple-import-sort/imports */
 
+import { Injectable } from '@nestjs/common';
+import { In, Repository } from 'typeorm';
+
+import { EmployeeIdProps } from '@modules/employee/domain/models/employee-id.model';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CreateEmployeeProps } from 'src/modules/employee/domain/models/create-employee.model';
+import { EmployeeRepository } from 'src/modules/employee/domain/repositories/employee.repository';
 import { Employee } from '../entities/employee.entity';
 
 @Injectable()
 export class TypeormEmployeeRepository implements EmployeeRepository {
   constructor(
     @InjectRepository(Employee)
-    private readonly ormEmployeeRepository: Repository<Employee>,
+    private readonly ormRepository: Repository<Employee>,
   ) {}
 
   async create({
     jobTitle,
     name,
     phone,
+    team,
   }: CreateEmployeeProps): Promise<Employee> {
-    const employee = this.ormEmployeeRepository.create({
+    const employee = this.ormRepository.create({
       name,
       phone,
       jobTitle,
+      team,
     });
-    await this.ormEmployeeRepository.save(employee);
+    await this.ormRepository.save(employee);
     return employee;
   }
 
   async save(employee: Employee): Promise<Employee> {
-    await this.ormEmployeeRepository.save(employee);
+    await this.ormRepository.save(employee);
     return employee;
   }
 
   async remove(employee: Employee): Promise<void> {
-    await this.ormEmployeeRepository.delete({ id: employee.id });
+    await this.ormRepository.delete({ id: employee.id });
   }
 
   async findByName(name: string): Promise<Employee | null> {
-    const employee = await this.ormEmployeeRepository.findOneBy({ name });
+    const employee = await this.ormRepository.findOneBy({ name });
     return employee;
   }
 
   async findById(id: string): Promise<Employee | null> {
-    const employee = await this.ormEmployeeRepository.findOne({
+    const employee = await this.ormRepository.findOne({
       where: { id },
     });
     return employee;
   }
 
-  async findAll(): Promise<EmployeeProps[]> {
-    const employees = await this.ormEmployeeRepository.find();
+  async getAllByIds(employees: EmployeeIdProps[]): Promise<Employee[]> {
+    console.log(employees);
+    const employeeIds = employees.map(employee => employee.id);
+
+    console.log(employeeIds);
+    const existentEmployees = await this.ormRepository.find({
+      where: {
+        id: In(employeeIds),
+      },
+    });
+    return existentEmployees;
+  }
+
+  async findAll(): Promise<Employee[]> {
+    const employees = await this.ormRepository.find();
+    return employees;
+  }
+
+  async findAllWithTeams(): Promise<Employee[]> {
+    const employees = await this.ormRepository
+      .createQueryBuilder('employee')
+      .leftJoinAndSelect('employee.team', 'team')
+      .getMany();
+
     return employees;
   }
 }

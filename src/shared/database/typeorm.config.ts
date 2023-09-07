@@ -14,6 +14,7 @@ import { CreateFactory1691111185940 } from './migrations/1691111185940-create-fa
 import { CreatePlan1691454995172 } from './migrations/1691454995172-create-plan';
 import { CreatePlanDetail1691541523206 } from './migrations/1691541523206-create-plan-detail';
 import { CreateShoesModel1691712523021 } from './migrations/1691712523021-create-shoes-model';
+import { AddTeamIdToEmployee1692536304552 } from './migrations/1692536304552-add-team-id-to-employee';
 
 @Injectable()
 export class TypeOrmConfig implements TypeOrmOptionsFactory {
@@ -33,6 +34,7 @@ export class TypeOrmConfig implements TypeOrmOptionsFactory {
         CreatePlan1691454995172,
         CreatePlanDetail1691541523206,
         CreateShoesModel1691712523021,
+        AddTeamIdToEmployee1692536304552,
       ],
       migrationsRun: true,
     };
