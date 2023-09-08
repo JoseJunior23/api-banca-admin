@@ -1,8 +1,11 @@
+import { Factory } from '@modules/factory/infra/typeorm/entities/factory.entity';
 import { ShoesModelProps } from '@modules/shoes-model/domain/models/shoes-model';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -26,6 +29,10 @@ export class ShoesModel implements ShoesModelProps {
 
   @Column({ name: 'price_coladeira', type: 'float' })
   priceColadeira: number;
+
+  // @ManyToOne(() => Factory, factory => factory.shoesModels)
+  // @JoinColumn({ name: 'model_id' })
+  // factory: Factory;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
