@@ -35,6 +35,7 @@ export class ShoesModelController {
       pricePairsShoes,
       pricePespontador,
       reference,
+      factoryId,
     }: CreateShoesModelDto,
   ) {
     const shoesModel = await this.createShoesModel.execute({
@@ -43,6 +44,7 @@ export class ShoesModelController {
       pricePairsShoes,
       pricePespontador,
       reference,
+      factoryId,
     });
     return { shoesModel: ShoesModelViewModel.toHTTP(shoesModel) };
   }

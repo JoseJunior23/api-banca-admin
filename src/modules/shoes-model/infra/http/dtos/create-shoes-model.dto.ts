@@ -1,16 +1,22 @@
-import { CreateShoesModelProps } from '@modules/shoes-model/domain/models/create-shoes-model';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator';
 
-export class CreateShoesModelDto implements CreateShoesModelProps {
+export class CreateShoesModelDto {
   @IsNotEmpty()
   reference: string;
 
-  description: string;
+  description?: string;
 
   @IsNotEmpty()
+  @IsNumber()
   pricePairsShoes: number;
 
+  @IsNumber()
   pricePespontador: number;
 
+  @IsNumber()
   priceColadeira: number;
+
+  @IsString()
+  @IsUUID()
+  factoryId: string;
 }

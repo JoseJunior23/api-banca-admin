@@ -8,7 +8,7 @@ export class ListShoesModelService {
   constructor(private readonly shoesModelRepository: ShoesModelRepository) {}
 
   public async execute(): Promise<ShoesModelProps[]> {
-    const shoesModels = await this.shoesModelRepository.findAll();
+    const shoesModels = await this.shoesModelRepository.findAllWithFactories();
 
     return shoesModels;
   }

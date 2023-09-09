@@ -15,4 +15,4 @@ import { TypeormFactoryRepository } from './repositories/typeorm-factory.reposit
   ],
   exports: [FactoryRepository],
 })
-export class FactoryTypeormModule {}
+export class TypeormFactoryModule {}

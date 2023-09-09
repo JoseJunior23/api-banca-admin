@@ -1,13 +1,17 @@
+import { Factory } from '@modules/factory/infra/typeorm/entities/factory.entity';
+
 export class UpdateShoesModelDto {
   id: string;
 
-  reference: string;
+  reference?: string;
 
-  description: string;
+  description?: string;
 
-  pricePairsShoes: number;
+  pricePairsShoes?: number;
 
-  pricePespontador: number;
+  pricePespontador?: number;
 
-  priceColadeira: number;
+  priceColadeira?: number;
+
+  factoryId?: Factory;
 }

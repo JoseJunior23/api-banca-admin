@@ -4,11 +4,11 @@ import { ListFactoryService } from '@modules/factory/domain/services/list-factor
 import { UpdateFactoryService } from '@modules/factory/domain/services/update-factory.service';
 import { Module } from '@nestjs/common';
 
-import { FactoryTypeormModule } from '../typeorm/factory-typeorm.module';
+import { TypeormFactoryModule } from '../typeorm/factory-typeorm.module';
 import { FactoryController } from './controllers/factory.controller';
 
 @Module({
-  imports: [FactoryTypeormModule],
+  imports: [TypeormFactoryModule],
   controllers: [FactoryController],
   providers: [
     CreateFactoryService,
@@ -17,4 +17,4 @@ import { FactoryController } from './controllers/factory.controller';
     DeleteFactoryService,
   ],
 })
-export class FactoryHttpModule {}
+export class HttpFactoryModule {}

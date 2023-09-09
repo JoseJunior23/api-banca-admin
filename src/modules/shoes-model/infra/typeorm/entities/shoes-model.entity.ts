@@ -19,7 +19,7 @@ export class ShoesModel implements ShoesModelProps {
   reference: string;
 
   @Column()
-  description: string;
+  description?: string;
 
   @Column({ name: 'price_pairs_shoes', type: 'float' })
   pricePairsShoes: number;
@@ -30,9 +30,9 @@ export class ShoesModel implements ShoesModelProps {
   @Column({ name: 'price_coladeira', type: 'float' })
   priceColadeira: number;
 
-  // @ManyToOne(() => Factory, factory => factory.shoesModels)
-  // @JoinColumn({ name: 'model_id' })
-  // factory: Factory;
+  @ManyToOne(() => Factory, factory => factory.shoesModels)
+  @JoinColumn({ name: 'factory_id' })
+  factory: Factory;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

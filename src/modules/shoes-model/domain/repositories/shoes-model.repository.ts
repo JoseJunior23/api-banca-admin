@@ -8,4 +8,5 @@ export abstract class ShoesModelRepository {
   abstract findAll(): Promise<ShoesModelProps[]>;
   abstract findById(id: string): Promise<ShoesModelProps | null>;
   abstract findByReference(reference: string): Promise<ShoesModelProps | null>;
+  abstract findAllWithFactories(): Promise<ShoesModelProps[]>;
 }

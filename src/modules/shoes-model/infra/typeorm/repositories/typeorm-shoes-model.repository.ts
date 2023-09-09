@@ -20,6 +20,7 @@ export class TypeormShoesModelRepository implements ShoesModelRepository {
     pricePairsShoes,
     pricePespontador,
     priceColadeira,
+    factory,
   }: CreateShoesModelProps): Promise<ShoesModel> {
     const shoesModel = this.ormShoesModelRepository.create({
       reference,
@@ -27,6 +28,7 @@ export class TypeormShoesModelRepository implements ShoesModelRepository {
       pricePairsShoes,
       pricePespontador,
       priceColadeira,
+      factory,
     });
 
     await this.ormShoesModelRepository.save(shoesModel);
@@ -59,5 +61,13 @@ export class TypeormShoesModelRepository implements ShoesModelRepository {
       reference,
     });
     return shoesModel;
+  }
+  async findAllWithFactories(): Promise<ShoesModel[]> {
+    const shoesModels = await this.ormShoesModelRepository
+      .createQueryBuilder('shoesModel')
+      .leftJoinAndSelect('shoesModel.factory', 'factory')
+      .getMany();
+
+    return shoesModels;
   }
 }

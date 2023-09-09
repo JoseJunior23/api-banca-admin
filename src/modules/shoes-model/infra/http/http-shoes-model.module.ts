@@ -1,3 +1,4 @@
+import { TypeormFactoryModule } from '@modules/factory/infra/typeorm/factory-typeorm.module';
 import { CreateShoesModelService } from '@modules/shoes-model/domain/services/create-shoes-model.service';
 import { DeleteShoesModelService } from '@modules/shoes-model/domain/services/delete-shoes-model.service';
 import { ListShoesModelService } from '@modules/shoes-model/domain/services/list-shoes-model.service';
@@ -8,7 +9,7 @@ import { TypeormShoesModelModule } from '../typeorm/typeorm-shoes-model.module';
 import { ShoesModelController } from './controllers/shoes-model.controller';
 
 @Module({
-  imports: [TypeormShoesModelModule],
+  imports: [TypeormShoesModelModule, TypeormFactoryModule],
   controllers: [ShoesModelController],
   providers: [
     CreateShoesModelService,

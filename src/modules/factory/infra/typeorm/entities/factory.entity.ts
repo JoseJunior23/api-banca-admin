@@ -20,10 +20,10 @@ export class Factory implements FactoryProps {
   @Column()
   phone: string;
 
-  // @OneToMany(() => ShoesModel, shoesModels => shoesModels.factory, {
-  //   cascade: true,
-  // })
-  // shoesModels: ShoesModel[];
+  @OneToMany(() => ShoesModel, shoesModels => shoesModels.factory, {
+    cascade: true,
+  })
+  shoesModels?: ShoesModel[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
