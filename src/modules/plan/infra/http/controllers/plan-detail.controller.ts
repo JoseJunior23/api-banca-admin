@@ -37,6 +37,7 @@ export class PlanDetailController {
       numberPairs,
       paymentDate,
       productionSheet,
+      shoesModelId,
     }: CreatePlanDetailDto,
   ) {
     const planDetail = await this.createPlanDetail.execute({
@@ -47,6 +48,7 @@ export class PlanDetailController {
       numberPairs,
       paymentDate,
       productionSheet,
+      shoesModelId,
     });
     return { planDetail: PlanDetailViewModel.toHTTP(planDetail) };
   }

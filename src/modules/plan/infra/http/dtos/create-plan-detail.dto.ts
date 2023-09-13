@@ -1,7 +1,6 @@
-import { CreatePlanDetailProps } from '@modules/plan/domain/models/create-Plan-detail.model';
-import { IsNotEmpty, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator';
 
-export class CreatePlanDetailDto implements CreatePlanDetailProps {
+export class CreatePlanDetailDto {
   @IsNotEmpty()
   entryDate: Date;
 
@@ -19,4 +18,8 @@ export class CreatePlanDetailDto implements CreatePlanDetailProps {
   billedDate: Date;
 
   paymentDate: Date;
+
+  @IsString()
+  @IsUUID()
+  shoesModelId: string;
 }

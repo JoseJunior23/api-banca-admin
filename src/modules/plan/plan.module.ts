@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
-import { PlanHttpModule } from './infra/http/plan-http.module';
-import { PlanTypeormModule } from './infra/typeorm/plan-typeorm.module';
+import { HttpPlanModule } from './infra/http/plan-http.module';
+import { TypeormPlanModule } from './infra/typeorm/plan-typeorm.module';
 
 @Module({
-  imports: [PlanHttpModule, PlanTypeormModule],
+  imports: [HttpPlanModule, TypeormPlanModule],
 })
 export class PlanModule {}

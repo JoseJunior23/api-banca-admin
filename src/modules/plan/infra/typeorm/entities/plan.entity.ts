@@ -16,7 +16,7 @@ export class Plan implements PlanProps {
   variation: string;
 
   @Column()
-  description: string;
+  description?: string;
 
   @Column({ name: 'entry_date' })
   entryDate: Date;

@@ -1,4 +1,5 @@
 import { Factory } from '@modules/factory/infra/typeorm/entities/factory.entity';
+import { PlanDetail } from '@modules/plan/infra/typeorm/entities/plan-detail.entity';
 import { ShoesModelProps } from '@modules/shoes-model/domain/models/shoes-model';
 import {
   Column,
@@ -6,6 +7,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -33,6 +35,11 @@ export class ShoesModel implements ShoesModelProps {
   @ManyToOne(() => Factory, factory => factory.shoesModels)
   @JoinColumn({ name: 'factory_id' })
   factory: Factory;
+
+  @OneToMany(() => PlanDetail, planDetails => planDetails.shoesModel, {
+    cascade: true,
+  })
+  planDetails?: PlanDetail[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

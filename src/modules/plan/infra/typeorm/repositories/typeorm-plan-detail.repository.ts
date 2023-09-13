@@ -22,6 +22,7 @@ export class TypeormPlanDetailRepository implements PlanDetailRepository {
     numberPairs,
     paymentDate,
     productionSheet,
+    shoesModel,
   }: CreatePlanDetailProps): Promise<PlanDetail> {
     const planDetail = this.ormPlanDetailRepository.create({
       billed,
@@ -31,6 +32,7 @@ export class TypeormPlanDetailRepository implements PlanDetailRepository {
       numberPairs,
       paymentDate,
       productionSheet,
+      shoesModel,
     });
     await this.ormPlanDetailRepository.save(planDetail);
     return planDetail;
@@ -54,6 +56,14 @@ export class TypeormPlanDetailRepository implements PlanDetailRepository {
 
   async findAll(): Promise<PlanDetailProps[]> {
     const planDetails = await this.ormPlanDetailRepository.find();
+    return planDetails;
+  }
+
+  async findAllWithShoesModel(): Promise<PlanDetail[]> {
+    const planDetails = await this.ormPlanDetailRepository
+      .createQueryBuilder('planDetail')
+      .leftJoinAndSelect('planDetail.shoesModel', 'shoesModels')
+      .getMany();
     return planDetails;
   }
 

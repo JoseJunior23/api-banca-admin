@@ -23,4 +23,4 @@ import { TypeormPlanRepository } from './repositories/typeorm-plan.repository';
   ],
   exports: [PlanRepository, PlanDetailRepository],
 })
-export class PlanTypeormModule {}
+export class TypeormPlanModule {}

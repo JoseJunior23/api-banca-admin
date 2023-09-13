@@ -1,3 +1,5 @@
+import { ShoesModel } from '@modules/shoes-model/infra/typeorm/entities/shoes-model.entity';
+
 export interface PlanDetailProps {
   id: string;
   entryDate: Date;
@@ -7,6 +9,7 @@ export interface PlanDetailProps {
   billed: number;
   billedDate: Date;
   paymentDate: Date;
+  shoesModel: ShoesModel;
   createdAt: Date;
   updatedAt: Date;
 }

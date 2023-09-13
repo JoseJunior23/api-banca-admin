@@ -41,7 +41,7 @@ export class TypeormShoesModelRepository implements ShoesModelRepository {
   }
 
   async remove(shoesModel: ShoesModelProps): Promise<void> {
-    await this.ormShoesModelRepository.remove(shoesModel);
+    await this.ormShoesModelRepository.delete(shoesModel);
   }
 
   async findAll(): Promise<ShoesModelProps[]> {
@@ -67,7 +67,6 @@ export class TypeormShoesModelRepository implements ShoesModelRepository {
       .createQueryBuilder('shoesModel')
       .leftJoinAndSelect('shoesModel.factory', 'factory')
       .getMany();
-
     return shoesModels;
   }
 }

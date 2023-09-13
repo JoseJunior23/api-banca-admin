@@ -1,8 +1,11 @@
 import { PlanDetailProps } from '@modules/plan/domain/models/plan-detail.model';
+import { ShoesModel } from '@modules/shoes-model/infra/typeorm/entities/shoes-model.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -32,6 +35,12 @@ export class PlanDetail implements PlanDetailProps {
 
   @Column({ name: 'payment_date' })
   paymentDate: Date;
+
+  @ManyToOne(() => ShoesModel, shoesModel => shoesModel.planDetails, {
+    eager: true,
+  })
+  @JoinColumn({ name: 'shoes_model_id' })
+  shoesModel: ShoesModel;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
