@@ -10,6 +10,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import { Plan } from './plan.entity';
+
 @Entity('plan_details')
 export class PlanDetail implements PlanDetailProps {
   @PrimaryGeneratedColumn('uuid')
@@ -41,6 +43,10 @@ export class PlanDetail implements PlanDetailProps {
   })
   @JoinColumn({ name: 'shoes_model_id' })
   shoesModel: ShoesModel;
+
+  @ManyToOne(() => Plan, plan => plan.planDetails, { eager: true })
+  @JoinColumn({ name: 'plan_id' })
+  plan: Plan;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

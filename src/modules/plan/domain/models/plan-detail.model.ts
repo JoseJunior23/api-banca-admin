@@ -1,3 +1,4 @@
+import { Plan } from '@modules/plan/infra/typeorm/entities/plan.entity';
 import { ShoesModel } from '@modules/shoes-model/infra/typeorm/entities/shoes-model.entity';
 
 export interface PlanDetailProps {
@@ -10,6 +11,7 @@ export interface PlanDetailProps {
   billedDate: Date;
   paymentDate: Date;
   shoesModel: ShoesModel;
+  plan: Plan;
   createdAt: Date;
   updatedAt: Date;
 }

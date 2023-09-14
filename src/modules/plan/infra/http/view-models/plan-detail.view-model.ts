@@ -3,9 +3,10 @@ import { PlanDetail } from '../../typeorm/entities/plan-detail.entity';
 export class PlanDetailViewModel {
   static toHTTP(planDetail: PlanDetail) {
     const shoesModelFilter = {
-      factory: planDetail.shoesModel ? planDetail.shoesModel.factory : null,
       reference: planDetail.shoesModel ? planDetail.shoesModel.reference : null,
     };
+    const planFilter = planDetail.plan ? planDetail.plan.factoryPlan : null;
+
     return {
       planDetailId: planDetail.id,
       entryDate: planDetail.entryDate,
@@ -16,6 +17,7 @@ export class PlanDetailViewModel {
       billedDate: planDetail.billedDate,
       paymentDate: planDetail.paymentDate,
       shoesModel: shoesModelFilter,
+      plan: planFilter,
     };
   }
 }

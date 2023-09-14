@@ -22,4 +22,8 @@ export class CreatePlanDetailDto {
   @IsString()
   @IsUUID()
   shoesModelId: string;
+
+  @IsString()
+  @IsUUID()
+  plan: string;
 }

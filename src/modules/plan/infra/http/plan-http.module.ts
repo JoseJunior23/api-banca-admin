@@ -15,7 +15,7 @@ import { PlanDetailController } from './controllers/plan-detail.controller';
 import { PlanController } from './controllers/plan.controller';
 
 @Module({
-  imports: [TypeormPlanModule, TypeormShoesModelModule],
+  imports: [TypeormPlanModule, TypeormShoesModelModule, TypeormPlanModule],
   controllers: [PlanController, PlanDetailController],
   providers: [
     CreatePlanService,
