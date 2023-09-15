@@ -5,7 +5,9 @@ export class PlanDetailViewModel {
     const shoesModelFilter = {
       reference: planDetail.shoesModel ? planDetail.shoesModel.reference : null,
     };
+
     const planFilter = planDetail.plan ? planDetail.plan.factoryPlan : null;
+    const teamFilter = planDetail.team ? planDetail.team.name : null;
 
     return {
       planDetailId: planDetail.id,
@@ -18,6 +20,7 @@ export class PlanDetailViewModel {
       paymentDate: planDetail.paymentDate,
       shoesModel: shoesModelFilter,
       plan: planFilter,
+      team: teamFilter,
     };
   }
 }

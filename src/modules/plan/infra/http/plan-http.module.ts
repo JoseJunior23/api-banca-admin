@@ -10,12 +10,18 @@ import { UpdatePlanService } from '@modules/plan/domain/services/update-plan.ser
 import { Module } from '@nestjs/common';
 
 import { TypeormShoesModelModule } from '@modules/shoes-model/infra/typeorm/typeorm-shoes-model.module';
+import { TypeormTeamModule } from '@modules/team/infra/typeorm/team-typeorm.module';
 import { TypeormPlanModule } from '../typeorm/plan-typeorm.module';
 import { PlanDetailController } from './controllers/plan-detail.controller';
 import { PlanController } from './controllers/plan.controller';
 
 @Module({
-  imports: [TypeormPlanModule, TypeormShoesModelModule, TypeormPlanModule],
+  imports: [
+    TypeormPlanModule,
+    TypeormShoesModelModule,
+    TypeormPlanModule,
+    TypeormTeamModule,
+  ],
   controllers: [PlanController, PlanDetailController],
   providers: [
     CreatePlanService,

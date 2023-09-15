@@ -26,4 +26,8 @@ export class CreatePlanDetailDto {
   @IsString()
   @IsUUID()
   plan: string;
+
+  @IsString()
+  @IsUUID()
+  team: string;
 }

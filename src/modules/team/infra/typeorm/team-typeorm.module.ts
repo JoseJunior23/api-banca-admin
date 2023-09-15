@@ -15,4 +15,4 @@ import { TeamTypeormRepository } from './repositories/typeorm-team.Repository';
   ],
   exports: [TeamRepository],
 })
-export class TeamTypeormModule {}
+export class TypeormTeamModule {}

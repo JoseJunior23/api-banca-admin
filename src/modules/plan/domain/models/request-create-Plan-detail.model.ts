@@ -8,4 +8,5 @@ export interface RequestCreatePlanDetailProps {
   paymentDate: Date;
   shoesModelId: string;
   plan: string;
+  team: string;
 }

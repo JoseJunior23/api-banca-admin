@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
-import { TeamHttpModule } from './infra/http/team-http.module';
-import { TeamTypeormModule } from './infra/typeorm/team-typeorm.module';
+import { HttpTeamModule } from './infra/http/team-http.module';
+import { TypeormTeamModule } from './infra/typeorm/team-typeorm.module';
 
 @Module({
-  imports: [TeamTypeormModule, TeamHttpModule],
+  imports: [TypeormTeamModule, HttpTeamModule],
 })
 export class TeamModule {}

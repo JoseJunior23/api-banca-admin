@@ -4,11 +4,11 @@ import { ListTeamService } from '@modules/team/domain/services/list-team.service
 import { UpdateTeamService } from '@modules/team/domain/services/update-team.service';
 import { Module } from '@nestjs/common';
 
-import { TeamTypeormModule } from '../typeorm/team-typeorm.module';
+import { TypeormTeamModule } from '../typeorm/team-typeorm.module';
 import { TeamController } from './controllers/team.controller';
 
 @Module({
-  imports: [TeamTypeormModule],
+  imports: [TypeormTeamModule],
   controllers: [TeamController],
   providers: [
     CreateTeamService,
@@ -17,4 +17,4 @@ import { TeamController } from './controllers/team.controller';
     DeleteTeamService,
   ],
 })
-export class TeamHttpModule {}
+export class HttpTeamModule {}

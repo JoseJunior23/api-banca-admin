@@ -6,6 +6,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 
+import { TeamRepository } from '@modules/team/domain/repositories/team.repository';
 import { PlanDetailProps } from '../models/plan-detail.model';
 import { RequestCreatePlanDetailProps } from '../models/request-create-Plan-detail.model';
 import { PlanDetailRepository } from '../repositories/plan-detail.repository';
@@ -17,6 +18,7 @@ export class CreatePlanDetailService {
     private readonly planDetailRepository: PlanDetailRepository,
     private readonly shoesModelRepository: ShoesModelRepository,
     private readonly planRepository: PlanRepository,
+    private readonly teamRepository: TeamRepository,
   ) {}
 
   public async execute({
@@ -29,6 +31,7 @@ export class CreatePlanDetailService {
     paymentDate,
     shoesModelId,
     plan,
+    team,
   }: RequestCreatePlanDetailProps): Promise<PlanDetailProps> {
     const ProductionExists = await this.planDetailRepository.productionSheet(
       productionSheet,
@@ -51,6 +54,11 @@ export class CreatePlanDetailService {
       throw new NotFoundException('Plan not found.');
     }
 
+    const existsTeam = await this.teamRepository.findById(team);
+    if (!existsTeam) {
+      throw new NotFoundException('Team not found.');
+    }
+
     const planDetail = this.planDetailRepository.create({
       entryDate,
       departureDate,
@@ -61,6 +69,7 @@ export class CreatePlanDetailService {
       paymentDate,
       shoesModel: existsShoesModel,
       plan: existsPlan,
+      team: existsTeam,
     });
     return planDetail;
   }

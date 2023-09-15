@@ -1,5 +1,6 @@
 import { PlanDetailProps } from '@modules/plan/domain/models/plan-detail.model';
 import { ShoesModel } from '@modules/shoes-model/infra/typeorm/entities/shoes-model.entity';
+import { Team } from '@modules/team/infra/typeorm/entities/team.entity';
 import {
   Column,
   CreateDateColumn,
@@ -47,6 +48,10 @@ export class PlanDetail implements PlanDetailProps {
   @ManyToOne(() => Plan, plan => plan.planDetails, { eager: true })
   @JoinColumn({ name: 'plan_id' })
   plan: Plan;
+
+  @ManyToOne(() => Team, team => team.planDetails, { eager: true })
+  @JoinColumn({ name: 'team_id' })
+  team: Team;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
