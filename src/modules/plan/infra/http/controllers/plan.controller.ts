@@ -7,12 +7,12 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   Post,
   Put,
 } from '@nestjs/common';
 
-import { Plan } from '../../typeorm/entities/plan.entity';
 import { CreatePlanDto } from '../dtos/create-plan.dto';
 import { UpdatePlanDto } from '../dtos/update-plan.dto';
 import { PlanViewModel } from '../view-models/plan.view-model';
@@ -45,21 +45,23 @@ export class PlanController {
     return { plans: plans.map(PlanViewModel.toHTTP) };
   }
 
+  @HttpCode(204)
   @Put(':id/update')
   async update(
     @Param('id') id: string,
-    @Body() { variation, description, factoryPlan, entryDate }: UpdatePlanDto,
-  ): Promise<Plan> {
-    const newPlan = await this.updatePlan.execute({
+    @Body()
+    { variation, description, factoryPlan, entryDate }: UpdatePlanDto,
+  ) {
+    await this.updatePlan.execute({
       planId: id,
       variation,
       description,
       factoryPlan,
       entryDate,
     });
-    return newPlan;
   }
 
+  @HttpCode(204)
   @Delete(':id/delete')
   async remove(@Param('id') id: string) {
     await this.deletePlan.execute({ planId: id });

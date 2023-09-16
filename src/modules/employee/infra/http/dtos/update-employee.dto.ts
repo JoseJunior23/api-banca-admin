@@ -1,11 +1,5 @@
-import { Team } from '@modules/team/infra/typeorm/entities/team.entity';
+import { PartialType } from '@nestjs/mapped-types';
 
-export class UpdateEmployeeDto {
-  name?: string;
+import { CreateEmployeeDto } from './create-employee.dto';
 
-  phone?: string;
-
-  jobTitle?: string;
-
-  team?: Team;
-}
+export class UpdateEmployeeDto extends PartialType(CreateEmployeeDto) {}

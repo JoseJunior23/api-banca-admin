@@ -7,8 +7,6 @@ export abstract class PlanDetailRepository {
   abstract remove(planDetail: PlanDetailProps): Promise<void>;
   abstract findAll(): Promise<PlanDetailProps[]>;
   abstract findById(id: string): Promise<PlanDetailProps | null>;
-  abstract findAllWithShoesModel(): Promise<PlanDetailProps[]>;
-  abstract findAllWithPlan(): Promise<PlanDetailProps[]>;
   abstract productionSheet(
     productionSheet: number,
   ): Promise<PlanDetailProps | null>;

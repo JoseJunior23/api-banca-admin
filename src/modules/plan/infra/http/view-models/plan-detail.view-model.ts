@@ -7,6 +7,7 @@ export class PlanDetailViewModel {
     };
 
     const planFilter = planDetail.plan ? planDetail.plan.factoryPlan : null;
+
     const teamFilter = planDetail.team ? planDetail.team.name : null;
 
     return {
@@ -18,9 +19,9 @@ export class PlanDetailViewModel {
       billed: planDetail.billed,
       billedDate: planDetail.billedDate,
       paymentDate: planDetail.paymentDate,
-      shoesModel: shoesModelFilter,
       plan: planFilter,
       team: teamFilter,
+      shoesModel: shoesModelFilter,
     };
   }
 }

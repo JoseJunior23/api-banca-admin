@@ -27,7 +27,7 @@ export class UpdateShoesModelService {
     }
 
     const exitsFactory = await this.factoryRepository.findById(factoryId);
-    console.log(exitsFactory);
+
     if (!exitsFactory) {
       throw new NotFoundException('Factory not found.');
     }

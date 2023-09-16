@@ -30,8 +30,8 @@ export class CreatePlanDetailService {
     billedDate,
     paymentDate,
     shoesModelId,
-    plan,
-    team,
+    planId,
+    teamId,
   }: RequestCreatePlanDetailProps): Promise<PlanDetailProps> {
     const ProductionExists = await this.planDetailRepository.productionSheet(
       productionSheet,
@@ -49,12 +49,12 @@ export class CreatePlanDetailService {
       throw new NotFoundException('Shoes model not found.');
     }
 
-    const existsPlan = await this.planRepository.findById(plan);
+    const existsPlan = await this.planRepository.findById(planId);
     if (!existsPlan) {
       throw new NotFoundException('Plan not found.');
     }
 
-    const existsTeam = await this.teamRepository.findById(team);
+    const existsTeam = await this.teamRepository.findById(teamId);
     if (!existsTeam) {
       throw new NotFoundException('Team not found.');
     }

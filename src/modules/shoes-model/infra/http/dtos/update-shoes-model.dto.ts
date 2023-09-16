@@ -1,17 +1,5 @@
-import { Factory } from '@modules/factory/infra/typeorm/entities/factory.entity';
+import { PartialType } from '@nestjs/mapped-types';
 
-export class UpdateShoesModelDto {
-  id: string;
+import { CreateShoesModelDto } from './create-shoes-model.dto';
 
-  reference?: string;
-
-  description?: string;
-
-  pricePairsShoes?: number;
-
-  pricePespontador?: number;
-
-  priceColadeira?: number;
-
-  factoryId?: Factory;
-}
+export class UpdateShoesModelDto extends PartialType(CreateShoesModelDto) {}

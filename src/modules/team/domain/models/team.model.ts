@@ -3,7 +3,7 @@ import { Employee } from '@modules/employee/infra/typeorm/entities/employee.enti
 export interface TeamProps {
   id: string;
   name: string;
-  description: string;
+  description?: string;
   created_at: Date;
   updated_at: Date;
   employees?: Employee[];

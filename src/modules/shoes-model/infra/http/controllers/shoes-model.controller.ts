@@ -7,12 +7,12 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   Post,
   Put,
 } from '@nestjs/common';
 
-import { ShoesModel } from '../../typeorm/entities/shoes-model.entity';
 import { CreateShoesModelDto } from '../dtos/create-shoes-model.dto';
 import { UpdateShoesModelDto } from '../dtos/update-shoes-model.dto';
 import { ShoesModelViewModel } from '../view-models/shoes-model.view-model';
@@ -55,6 +55,7 @@ export class ShoesModelController {
     return { shoesModels: shoesModels.map(ShoesModelViewModel.toHTTP) };
   }
 
+  @HttpCode(204)
   @Put(':id/update')
   async update(
     @Param('id') id: string,
@@ -65,19 +66,21 @@ export class ShoesModelController {
       pricePairsShoes,
       pricePespontador,
       reference,
+      factoryId,
     }: UpdateShoesModelDto,
-  ): Promise<ShoesModel> {
-    const newShoesModel = await this.updateShoesModel.execute({
+  ) {
+    await this.updateShoesModel.execute({
       shoesModelId: id,
       description,
       priceColadeira,
       pricePairsShoes,
       pricePespontador,
       reference,
+      factoryId,
     });
-    return newShoesModel;
   }
 
+  @HttpCode(204)
   @Delete(':id/delete')
   async remove(@Param('id') id: string) {
     await this.deleteShoesModel.execute({ shoesModelId: id });

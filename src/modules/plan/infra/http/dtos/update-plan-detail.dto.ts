@@ -1,15 +1,5 @@
-export class UpdatePlanDetailDto {
-  entryDate: Date;
+import { PartialType } from '@nestjs/mapped-types';
 
-  departureDate: Date;
+import { CreatePlanDetailDto } from './create-plan-detail.dto';
 
-  productionSheet: number;
-
-  numberPairs: number;
-
-  billed: number;
-
-  billedDate: Date;
-
-  paymentDate: Date;
-}
+export class UpdatePlanDetailDto extends PartialType(CreatePlanDetailDto) {}

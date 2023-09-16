@@ -1,10 +1,5 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { PartialType } from '@nestjs/mapped-types';
 
-export class UpdateTeamDto {
-  @IsNotEmpty()
-  @IsString()
-  name: string;
+import { CreateTeamDto } from './create-team.dto';
 
-  @IsString()
-  description: string;
-}
+export class UpdateTeamDto extends PartialType(CreateTeamDto) {}

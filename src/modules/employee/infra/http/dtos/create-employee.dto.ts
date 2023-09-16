@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class CreateEmployeeDto {
   @IsNotEmpty()
@@ -15,5 +15,6 @@ export class CreateEmployeeDto {
 
   @IsString()
   @IsUUID()
-  teamId?: string;
+  @IsOptional()
+  teamId?: string | null;
 }

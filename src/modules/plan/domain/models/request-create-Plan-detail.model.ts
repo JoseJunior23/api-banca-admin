@@ -7,6 +7,6 @@ export interface RequestCreatePlanDetailProps {
   billedDate: Date;
   paymentDate: Date;
   shoesModelId: string;
-  plan: string;
-  team: string;
+  planId: string;
+  teamId: string;
 }

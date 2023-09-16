@@ -7,4 +7,7 @@ export interface UpdatePlanDetailProps {
   billed: number;
   billedDate: Date;
   paymentDate: Date;
+  planId: string;
+  teamId: string;
+  shoesModelId: string;
 }

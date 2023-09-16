@@ -2,7 +2,7 @@ import { TeamRepository } from '@modules/team/domain/repositories/team.repositor
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { EmployeeProps } from '../models/employee.model';
-import { UpdateEmployeeProps } from '../models/update-employee.model';
+import { RequestUpdateEmployeeProps } from '../models/request-update-employee.model';
 import { EmployeeRepository } from '../repositories/employee.repository';
 
 @Injectable()
@@ -17,14 +17,14 @@ export class UpdateEmployeeService {
     name,
     phone,
     jobTitle,
-    team,
-  }: UpdateEmployeeProps): Promise<EmployeeProps> {
+    teamId,
+  }: RequestUpdateEmployeeProps): Promise<EmployeeProps> {
     const employee = await this.employeeRepository.findById(employeeId);
     if (!employee) {
       throw new NotFoundException('Employee not found');
     }
 
-    const exitsTeam = await this.teamRepository.findById(team.id);
+    const exitsTeam = await this.teamRepository.findById(teamId);
     if (!exitsTeam) {
       throw new NotFoundException('Team not found');
     }
@@ -32,7 +32,7 @@ export class UpdateEmployeeService {
     employee.name = name;
     employee.phone = phone;
     employee.jobTitle = jobTitle;
-    employee.team = team;
+    employee.team = exitsTeam;
 
     await this.employeeRepository.save(employee);
 

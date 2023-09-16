@@ -1,16 +1,5 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { PartialType } from '@nestjs/mapped-types';
 
-export class UpdatePlanDto {
-  @IsNotEmpty()
-  @IsString()
-  variation: string;
+import { CreatePlanDto } from './create-plan.dto';
 
-  @IsString()
-  description: string;
-
-  @IsNotEmpty()
-  entryDate: Date;
-
-  @IsNotEmpty()
-  factoryPlan: number;
-}
+export class UpdatePlanDto extends PartialType(CreatePlanDto) {}

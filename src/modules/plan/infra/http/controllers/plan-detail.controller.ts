@@ -7,12 +7,12 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   Post,
   Put,
 } from '@nestjs/common';
 
-import { PlanDetail } from '../../typeorm/entities/plan-detail.entity';
 import { CreatePlanDetailDto } from '../dtos/create-plan-detail.dto';
 import { UpdatePlanDetailDto } from '../dtos/update-plan-detail.dto';
 import { PlanDetailViewModel } from '../view-models/plan-detail.view-model';
@@ -38,8 +38,8 @@ export class PlanDetailController {
       paymentDate,
       productionSheet,
       shoesModelId,
-      plan,
-      team,
+      planId,
+      teamId,
     }: CreatePlanDetailDto,
   ) {
     const planDetail = await this.createPlanDetail.execute({
@@ -51,8 +51,8 @@ export class PlanDetailController {
       paymentDate,
       productionSheet,
       shoesModelId,
-      plan,
-      team,
+      planId,
+      teamId,
     });
     return { planDetail: PlanDetailViewModel.toHTTP(planDetail) };
   }
@@ -63,6 +63,7 @@ export class PlanDetailController {
     return { planDetails: planDetails.map(PlanDetailViewModel.toHTTP) };
   }
 
+  @HttpCode(204)
   @Put(':id/update')
   async update(
     @Param('id') id: string,
@@ -75,9 +76,12 @@ export class PlanDetailController {
       numberPairs,
       paymentDate,
       productionSheet,
+      planId,
+      shoesModelId,
+      teamId,
     }: UpdatePlanDetailDto,
-  ): Promise<PlanDetail> {
-    const newPlanDetail = await this.updatePlanDetail.execute({
+  ) {
+    await this.updatePlanDetail.execute({
       planDetailId: id,
       billed,
       billedDate,
@@ -86,10 +90,13 @@ export class PlanDetailController {
       numberPairs,
       paymentDate,
       productionSheet,
+      planId,
+      shoesModelId,
+      teamId,
     });
-    return newPlanDetail;
   }
 
+  @HttpCode(204)
   @Delete(':id/delete')
   async remove(@Param('id') id: string) {
     await this.deletePlanDetail.execute({ planDetailId: id });

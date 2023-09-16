@@ -1,19 +1,27 @@
-import { IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 
 export class CreateShoesModelDto {
   @IsNotEmpty()
   reference: string;
 
+  @IsString()
+  @IsOptional()
   description?: string;
 
   @IsNotEmpty()
-  @IsNumber()
+  @IsNumber({ maxDecimalPlaces: 2 })
   pricePairsShoes: number;
 
-  @IsNumber()
+  @IsNumber({ maxDecimalPlaces: 2 })
   pricePespontador: number;
 
-  @IsNumber()
+  @IsNumber({ maxDecimalPlaces: 2 })
   priceColadeira: number;
 
   @IsString()

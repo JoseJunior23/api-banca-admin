@@ -58,31 +58,12 @@ export class TypeormPlanDetailRepository implements PlanDetailRepository {
     return planDetail;
   }
 
-  async findAll(): Promise<PlanDetailProps[]> {
-    const planDetails = await this.ormPlanDetailRepository.find();
-    return planDetails;
-  }
-
-  async findAllWithShoesModel(): Promise<PlanDetail[]> {
+  async findAll(): Promise<PlanDetail[]> {
     const planDetails = await this.ormPlanDetailRepository
       .createQueryBuilder('planDetail')
       .leftJoinAndSelect('planDetail.shoesModel', 'shoesModels')
-      .getMany();
-    return planDetails;
-  }
-
-  async findAllWithPlan(): Promise<PlanDetail[]> {
-    const planDetails = await this.ormPlanDetailRepository
-      .createQueryBuilder('plan')
-      .leftJoinAndSelect('planDetail.plan', 'plan')
-      .getMany();
-    return planDetails;
-  }
-
-  async findAllWithTeam(): Promise<PlanDetail[]> {
-    const planDetails = await this.ormPlanDetailRepository
-      .createQueryBuilder('team')
-      .leftJoinAndSelect('planDetail.team', 'team')
+      .leftJoinAndSelect('planDetail.plan', 'plans')
+      .leftJoinAndSelect('planDetail.team', 'teams')
       .getMany();
     return planDetails;
   }

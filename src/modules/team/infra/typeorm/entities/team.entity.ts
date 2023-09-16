@@ -19,7 +19,7 @@ export class Team implements TeamProps {
   name: string;
 
   @Column()
-  description: string;
+  description?: string;
 
   @OneToMany(() => Employee, employees => employees.team, {
     cascade: ['remove'],

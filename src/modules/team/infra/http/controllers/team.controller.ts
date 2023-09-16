@@ -7,12 +7,12 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   Post,
   Put,
 } from '@nestjs/common';
 
-import { Team } from '../../typeorm/entities/team.entity';
 import { CreateTeamDto } from '../dtos/create-team.dto';
 import { UpdateTeamDto } from '../dtos/update-team.dto';
 import { TeamViewModel } from '../view-models/team.view-model';
@@ -42,19 +42,20 @@ export class TeamController {
     return { teams: teams.map(TeamViewModel.toHTTP) };
   }
 
+  @HttpCode(204)
   @Put(':id/update')
   async update(
     @Param('id') id: string,
     @Body() { name, description }: UpdateTeamDto,
-  ): Promise<Team> {
-    const newTeam = await this.updateTeam.execute({
+  ) {
+    await this.updateTeam.execute({
       teamId: id,
       name,
       description,
     });
-    return newTeam;
   }
 
+  @HttpCode(204)
   @Delete(':id/delete')
   async remove(@Param('id') teamId: string) {
     await this.deleteTeam.execute({ teamId });

@@ -8,7 +8,7 @@ export class ListPlanDetailService {
   constructor(private readonly planDetailRepository: PlanDetailRepository) {}
 
   async execute(): Promise<PlanDetailProps[]> {
-    const planDetails = await this.planDetailRepository.findAllWithShoesModel();
+    const planDetails = await this.planDetailRepository.findAll();
     return planDetails;
   }
 }

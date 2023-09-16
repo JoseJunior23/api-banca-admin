@@ -1,9 +1,5 @@
-import { IsString } from 'class-validator';
+import { PartialType } from '@nestjs/mapped-types';
 
-export class UpdateFactoryDto {
-  @IsString()
-  companyName: string;
+import { CreateFactoryDto } from './create-factory.dto';
 
-  @IsString()
-  phone: string;
-}
+export class UpdateFactoryDto extends PartialType(CreateFactoryDto) {}
