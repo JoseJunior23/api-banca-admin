@@ -19,6 +19,7 @@ import { AddFactoryIdToShoesModel1694133403597 } from './migrations/169413340359
 import { AddShoesModelIdToPlanDetail1694476502505 } from './migrations/1694476502505-add-shoes-model-id-to-plan-detail';
 import { AddPlanIdToPlanDetail1694647743536 } from './migrations/1694647743536-add-plan-id-to-plan-detail';
 import { AddTeamIdToPlanDetail1694648155722 } from './migrations/1694648155722-add-team-id-to-plan-detail';
+import { CreateProfessionTable1695254582654 } from './migrations/1695254582654-create-profession';
 
 @Injectable()
 export class TypeOrmConfig implements TypeOrmOptionsFactory {
@@ -43,6 +44,7 @@ export class TypeOrmConfig implements TypeOrmOptionsFactory {
         AddShoesModelIdToPlanDetail1694476502505,
         AddPlanIdToPlanDetail1694647743536,
         AddTeamIdToPlanDetail1694648155722,
+        CreateProfessionTable1695254582654,
       ],
       migrationsRun: true,
     };
