@@ -1,7 +1,6 @@
-import { CreatePlanProps } from '@modules/plan/domain/models/create-plan.model';
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class CreatePlanDto implements CreatePlanProps {
+export class CreatePlanDto {
   @IsNotEmpty()
   @IsString()
   variation: string;
@@ -13,5 +12,10 @@ export class CreatePlanDto implements CreatePlanProps {
   entryDate: Date;
 
   @IsNotEmpty()
+  @IsNotEmpty()
   factoryPlan: number;
+
+  @IsNotEmpty()
+  @IsString()
+  factoryId: string;
 }

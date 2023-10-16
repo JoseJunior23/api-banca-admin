@@ -2,6 +2,7 @@ import { CreateEmployeeService } from '@modules/employee/domain/services/create-
 import { DeleteEmployeeService } from '@modules/employee/domain/services/delete-employee.service';
 import { ListEmployeeService } from '@modules/employee/domain/services/list-employee.service';
 import { UpdateEmployeeService } from '@modules/employee/domain/services/update-employee.service';
+import { TypeormProfessionModule } from '@modules/profession/infra/typeorm/typeorm-profession.module';
 import { TypeormTeamModule } from '@modules/team/infra/typeorm/team-typeorm.module';
 import { Module } from '@nestjs/common';
 
@@ -9,7 +10,7 @@ import { EmployeeTypeormModule } from '../typeorm/employee-typeorm.module';
 import { EmployeeController } from './controllers/employee.controller';
 
 @Module({
-  imports: [EmployeeTypeormModule, TypeormTeamModule],
+  imports: [EmployeeTypeormModule, TypeormTeamModule, TypeormProfessionModule],
   controllers: [EmployeeController],
   providers: [
     CreateEmployeeService,

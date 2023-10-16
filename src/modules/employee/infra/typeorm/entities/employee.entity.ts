@@ -1,3 +1,4 @@
+import { Profession } from '@modules/profession/infra/typeorm/entities/profession.entity';
 import { Team } from '@modules/team/infra/typeorm/entities/team.entity';
 import { EmployeeProps } from 'src/modules/employee/domain/models/employee.model';
 import {
@@ -21,8 +22,12 @@ export class Employee implements EmployeeProps {
   @Column()
   phone: string;
 
-  @Column({ name: 'job_title' })
-  jobTitle: string;
+  @ManyToOne(() => Profession, profession => profession.employees, {
+    cascade: ['insert'],
+    eager: true,
+  })
+  @JoinColumn({ name: 'profession_id' })
+  profession: Profession;
 
   @ManyToOne(() => Team, team => team.employees, {
     cascade: ['insert'],
@@ -30,9 +35,6 @@ export class Employee implements EmployeeProps {
   })
   @JoinColumn({ name: 'team_id' })
   team?: Team;
-
-  @Column({ name: 'team_id' })
-  teamId?: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

@@ -1,5 +1,4 @@
 import { CreatePlanProps } from '@modules/plan/domain/models/create-plan.model';
-import { PlanProps } from '@modules/plan/domain/models/plan.model';
 import { PlanRepository } from '@modules/plan/domain/repositories/plan.repository';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -19,12 +18,14 @@ export class TypeormPlanRepository implements PlanRepository {
     description,
     factoryPlan,
     entryDate,
+    factoryId,
   }: CreatePlanProps): Promise<Plan> {
     const plan = this.ormPlanRepository.create({
       variation,
       description,
       factoryPlan,
       entryDate,
+      factory: factoryId,
     });
     await this.ormPlanRepository.save(plan);
     return plan;
@@ -46,8 +47,11 @@ export class TypeormPlanRepository implements PlanRepository {
     return plan;
   }
 
-  async findAll(): Promise<PlanProps[]> {
-    const plans = await this.ormPlanRepository.find();
+  async findAll(): Promise<Plan[]> {
+    const plans = await this.ormPlanRepository
+      .createQueryBuilder('plan')
+      .leftJoinAndSelect('plan.factory', 'factories')
+      .getMany();
     return plans;
   }
 }

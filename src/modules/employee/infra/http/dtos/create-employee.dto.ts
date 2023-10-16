@@ -11,7 +11,8 @@ export class CreateEmployeeDto {
 
   @IsNotEmpty()
   @IsString()
-  jobTitle: string;
+  @IsUUID()
+  professionId: string;
 
   @IsString()
   @IsUUID()

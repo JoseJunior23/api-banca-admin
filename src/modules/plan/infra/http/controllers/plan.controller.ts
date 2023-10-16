@@ -28,13 +28,21 @@ export class PlanController {
 
   @Post()
   async create(
-    @Body() { variation, description, factoryPlan, entryDate }: CreatePlanDto,
+    @Body()
+    {
+      variation,
+      description,
+      factoryPlan,
+      entryDate,
+      factoryId,
+    }: CreatePlanDto,
   ) {
     const plan = await this.createPlan.execute({
       variation,
       description,
       factoryPlan,
       entryDate,
+      factoryId,
     });
     return { plan: PlanViewModel.toHTTP(plan) };
   }
@@ -50,7 +58,13 @@ export class PlanController {
   async update(
     @Param('id') id: string,
     @Body()
-    { variation, description, factoryPlan, entryDate }: UpdatePlanDto,
+    {
+      variation,
+      description,
+      factoryPlan,
+      entryDate,
+      factoryId,
+    }: UpdatePlanDto,
   ) {
     await this.updatePlan.execute({
       planId: id,
@@ -58,6 +72,7 @@ export class PlanController {
       description,
       factoryPlan,
       entryDate,
+      factoryId,
     });
   }
 

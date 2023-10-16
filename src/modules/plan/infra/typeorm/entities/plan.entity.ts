@@ -1,8 +1,11 @@
+import { Factory } from '@modules/factory/infra/typeorm/entities/factory.entity';
 import { PlanProps } from '@modules/plan/domain/models/plan.model';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -26,6 +29,10 @@ export class Plan implements PlanProps {
 
   @Column({ name: 'factory_plan' })
   factoryPlan: number;
+
+  @ManyToOne(() => Factory, factory => factory.plans, { eager: true })
+  @JoinColumn({ name: 'factory_id' })
+  factory: Factory;
 
   @OneToMany(() => PlanDetail, planDetails => planDetails.plan)
   planDetails?: PlanDetail[];

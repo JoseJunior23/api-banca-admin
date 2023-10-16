@@ -1,4 +1,5 @@
 import { FactoryProps } from '@modules/factory/domain/models/factory.model';
+import { Plan } from '@modules/plan/infra/typeorm/entities/plan.entity';
 import { ShoesModel } from '@modules/shoes-model/infra/typeorm/entities/shoes-model.entity';
 import {
   Column,
@@ -24,6 +25,11 @@ export class Factory implements FactoryProps {
     cascade: true,
   })
   shoesModels?: ShoesModel[];
+
+  @OneToMany(() => Plan, plans => plans.factoryPlan, {
+    cascade: true,
+  })
+  plans?: Plan[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

@@ -17,15 +17,15 @@ export class TypeormEmployeeRepository implements EmployeeRepository {
   ) {}
 
   async create({
-    jobTitle,
     name,
     phone,
+    profession,
     team,
   }: CreateEmployeeProps): Promise<Employee> {
     const employee = this.ormRepository.create({
       name,
       phone,
-      jobTitle,
+      profession,
       team,
     });
     await this.ormRepository.save(employee);
@@ -67,14 +67,10 @@ export class TypeormEmployeeRepository implements EmployeeRepository {
   }
 
   async findAll(): Promise<Employee[]> {
-    const employees = await this.ormRepository.find();
-    return employees;
-  }
-
-  async findAllWithTeams(): Promise<Employee[]> {
     const employees = await this.ormRepository
       .createQueryBuilder('employee')
-      .leftJoinAndSelect('employee.team', 'team')
+      .leftJoinAndSelect('employee.team', 'teams')
+      .leftJoinAndSelect('employee.profession', 'professions')
       .getMany();
 
     return employees;

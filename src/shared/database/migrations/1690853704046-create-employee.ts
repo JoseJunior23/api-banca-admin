@@ -23,10 +23,6 @@ export class CreateEmployee1690853704046 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'job_title',
-            type: 'varchar',
-          },
-          {
             name: 'created_at',
             type: 'timestamp with time zone',
             default: 'now()',

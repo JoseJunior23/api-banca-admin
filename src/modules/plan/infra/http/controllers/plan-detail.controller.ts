@@ -37,7 +37,6 @@ export class PlanDetailController {
       numberPairs,
       paymentDate,
       productionSheet,
-      shoesModelId,
       planId,
       teamId,
     }: CreatePlanDetailDto,
@@ -50,7 +49,6 @@ export class PlanDetailController {
       numberPairs,
       paymentDate,
       productionSheet,
-      shoesModelId,
       planId,
       teamId,
     });
@@ -77,7 +75,6 @@ export class PlanDetailController {
       paymentDate,
       productionSheet,
       planId,
-      shoesModelId,
       teamId,
     }: UpdatePlanDetailDto,
   ) {
@@ -91,7 +88,6 @@ export class PlanDetailController {
       paymentDate,
       productionSheet,
       planId,
-      shoesModelId,
       teamId,
     });
   }

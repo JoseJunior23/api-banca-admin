@@ -1,10 +1,10 @@
 /* eslint-disable simple-import-sort/imports */
-import { ShoesModelRepository } from '@modules/shoes-model/domain/repositories/shoes-model.repository';
-import { TeamRepository } from '@modules/team/domain/repositories/team.repository';
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { PlanDetailProps } from '../models/plan-detail.model';
 import { UpdatePlanDetailProps } from '../models/update-plan-detail.model';
+
+import { TeamRepository } from '@modules/team/domain/repositories/team.repository';
 import { PlanDetailRepository } from '../repositories/plan-detail.repository';
 import { PlanRepository } from '../repositories/plan.repository';
 
@@ -12,7 +12,6 @@ import { PlanRepository } from '../repositories/plan.repository';
 export class UpdatePlanDetailService {
   constructor(
     private readonly planDetailRepository: PlanDetailRepository,
-    private readonly shoesModelRepository: ShoesModelRepository,
     private readonly planRepository: PlanRepository,
     private readonly teamRepository: TeamRepository,
   ) {}
@@ -27,19 +26,11 @@ export class UpdatePlanDetailService {
     planDetailId,
     productionSheet,
     planId,
-    shoesModelId,
     teamId,
   }: UpdatePlanDetailProps): Promise<PlanDetailProps> {
     const planDetail = await this.planDetailRepository.findById(planDetailId);
     if (!planDetail) {
       throw new NotFoundException('Plan not found');
-    }
-
-    const existsShoesModel = await this.shoesModelRepository.findById(
-      shoesModelId,
-    );
-    if (!existsShoesModel) {
-      throw new NotFoundException('Shoes model not found.');
     }
 
     const existsPlan = await this.planRepository.findById(planId);
@@ -59,7 +50,6 @@ export class UpdatePlanDetailService {
     planDetail.billed = billed;
     planDetail.billedDate = billedDate;
     planDetail.paymentDate = paymentDate;
-    planDetail.shoesModel = existsShoesModel;
     planDetail.plan = existsPlan;
     planDetail.team = existsTeam;
 

@@ -1,3 +1,4 @@
+import { ProfessionRepository } from '@modules/profession/domain/repositories/profession.repository';
 import { TeamRepository } from '@modules/team/domain/repositories/team.repository';
 import {
   ConflictException,
@@ -14,12 +15,13 @@ export class CreateEmployeeService {
   constructor(
     private readonly employeeRepository: EmployeeRepository,
     private readonly teamRepository: TeamRepository,
+    private readonly professionRepository: ProfessionRepository,
   ) {}
 
   async execute({
-    jobTitle,
     name,
     phone,
+    professionId,
     teamId,
   }: RequestCreateEmployeeProps): Promise<EmployeeProps> {
     const existsEmployee = await this.employeeRepository.findByName(name);
@@ -30,17 +32,25 @@ export class CreateEmployeeService {
     }
 
     const existsTeam = await this.teamRepository.findById(teamId);
-    console.log(existsTeam);
     if (!existsTeam) {
       throw new NotFoundException(
         ' Could not find any Team with the given id.!!',
       );
     }
 
+    const existsProfession = await this.professionRepository.findById(
+      professionId,
+    );
+    if (!existsProfession) {
+      throw new NotFoundException(
+        ' Could not find any Profession with the given id.!!',
+      );
+    }
+
     const employee = await this.employeeRepository.create({
       name,
       phone,
-      jobTitle,
+      profession: existsProfession,
       team: existsTeam,
     });
     return employee;

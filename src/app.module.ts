@@ -1,6 +1,7 @@
 import { EmployeeModule } from '@modules/employee/employee.module';
 import { FactoryModule } from '@modules/factory/factory.module';
 import { PlanModule } from '@modules/plan/plan.module';
+import { ProfessionModule } from '@modules/profession/profession.module';
 import { ShoesModuleModule } from '@modules/shoes-model/shoes-model.module';
 import { TeamModule } from '@modules/team/team.module';
 import { Module } from '@nestjs/common';
@@ -17,6 +18,7 @@ import { TypeOrmConfig } from '@shared/database/typeorm.config';
     FactoryModule,
     PlanModule,
     ShoesModuleModule,
+    ProfessionModule,
   ],
 })
 export class AppModule {}

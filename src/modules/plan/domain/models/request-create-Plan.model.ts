@@ -1,7 +1,6 @@
-export interface UpdatePlanProps {
-  planId: string;
+export interface RequestCreatePlanProps {
   variation: string;
-  description: string;
+  description?: string;
   entryDate: Date;
   factoryPlan: number;
   factoryId: string;

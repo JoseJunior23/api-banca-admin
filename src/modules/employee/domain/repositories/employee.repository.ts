@@ -11,5 +11,4 @@ export abstract class EmployeeRepository {
   abstract findById(id: string): Promise<EmployeeProps | null>;
   abstract findAll(): Promise<EmployeeProps[]>;
   abstract getAllByIds(employees: EmployeeIdProps[]): Promise<EmployeeProps[]>;
-  abstract findAllWithTeams(): Promise<EmployeeProps[]>;
 }

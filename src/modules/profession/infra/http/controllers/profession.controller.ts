@@ -37,8 +37,8 @@ export class ProfessionController {
 
   @Get()
   async list() {
-    const factories = await this.listProfession.execute();
-    return { factories: factories.map(ProfessionViewModel.toHTTP) };
+    const professions = await this.listProfession.execute();
+    return { professions: professions.map(ProfessionViewModel.toHTTP) };
   }
 
   @HttpCode(204)

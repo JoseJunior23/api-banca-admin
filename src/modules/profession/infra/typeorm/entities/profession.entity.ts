@@ -1,8 +1,10 @@
+import { Employee } from '@modules/employee/infra/typeorm/entities/employee.entity';
 import { ProfessionProps } from '@modules/profession/domain/models/profession.model';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -17,6 +19,11 @@ export class Profession implements ProfessionProps {
 
   @Column()
   description?: string;
+
+  @OneToMany(() => Employee, employee => employee.profession, {
+    cascade: ['remove'],
+  })
+  employees?: Employee[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

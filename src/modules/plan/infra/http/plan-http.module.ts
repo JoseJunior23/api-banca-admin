@@ -9,6 +9,7 @@ import { UpdatePlanDetailService } from '@modules/plan/domain/services/update-pl
 import { UpdatePlanService } from '@modules/plan/domain/services/update-plan.service';
 import { Module } from '@nestjs/common';
 
+import { TypeormFactoryModule } from '@modules/factory/infra/typeorm/factory-typeorm.module';
 import { TypeormShoesModelModule } from '@modules/shoes-model/infra/typeorm/typeorm-shoes-model.module';
 import { TypeormTeamModule } from '@modules/team/infra/typeorm/team-typeorm.module';
 import { TypeormPlanModule } from '../typeorm/plan-typeorm.module';
@@ -21,6 +22,7 @@ import { PlanController } from './controllers/plan.controller';
     TypeormShoesModelModule,
     TypeormPlanModule,
     TypeormTeamModule,
+    TypeormFactoryModule,
   ],
   controllers: [PlanController, PlanDetailController],
   providers: [

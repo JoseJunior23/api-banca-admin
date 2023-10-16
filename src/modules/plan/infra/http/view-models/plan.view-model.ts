@@ -6,8 +6,9 @@ export class PlanViewModel {
       planId: plan.id,
       variation: plan.variation,
       description: plan.description,
-      factoryPlan: plan.factoryPlan,
       entryDate: plan.entryDate,
+      factoryPlan: plan.factoryPlan,
+      factory: plan.factory.companyName,
     };
   }
 }

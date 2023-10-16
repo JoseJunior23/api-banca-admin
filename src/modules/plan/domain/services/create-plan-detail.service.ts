@@ -1,5 +1,4 @@
 // eslint-disable-next-line simple-import-sort/imports
-import { ShoesModelRepository } from '@modules/shoes-model/domain/repositories/shoes-model.repository';
 import {
   ConflictException,
   Injectable,
@@ -16,7 +15,6 @@ import { PlanRepository } from '../repositories/plan.repository';
 export class CreatePlanDetailService {
   constructor(
     private readonly planDetailRepository: PlanDetailRepository,
-    private readonly shoesModelRepository: ShoesModelRepository,
     private readonly planRepository: PlanRepository,
     private readonly teamRepository: TeamRepository,
   ) {}
@@ -29,7 +27,6 @@ export class CreatePlanDetailService {
     billed,
     billedDate,
     paymentDate,
-    shoesModelId,
     planId,
     teamId,
   }: RequestCreatePlanDetailProps): Promise<PlanDetailProps> {
@@ -40,13 +37,6 @@ export class CreatePlanDetailService {
       throw new ConflictException(
         'There is a production sheet with this number !!!',
       );
-    }
-
-    const existsShoesModel = await this.shoesModelRepository.findById(
-      shoesModelId,
-    );
-    if (!existsShoesModel) {
-      throw new NotFoundException('Shoes model not found.');
     }
 
     const existsPlan = await this.planRepository.findById(planId);
@@ -67,7 +57,6 @@ export class CreatePlanDetailService {
       billed,
       billedDate,
       paymentDate,
-      shoesModel: existsShoesModel,
       plan: existsPlan,
       team: existsTeam,
     });

@@ -9,5 +9,4 @@ export interface UpdatePlanDetailProps {
   paymentDate: Date;
   planId: string;
   teamId: string;
-  shoesModelId: string;
 }
